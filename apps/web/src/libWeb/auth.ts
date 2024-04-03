@@ -27,12 +27,11 @@ export const config = {
       authorize: async (credentials, req) => {
         try {
           const signinMessage = new SigninMessage(
-            JSON.parse(credentials?.message || "{}"),
+            JSON.parse(credentials?.message || "{}") as SigninMessage,
           );
-          const nextAuthUrl = new URL(process.env.VERCEL_URL!);
-          if (signinMessage.domain !== nextAuthUrl.host) {
-            return null;
-          }
+          const nextAuthUrl = new URL(process.env.VERCEL_URL ?? "");
+
+          if (signinMessage.domain !== nextAuthUrl.host) return null;
 
           const csrfToken = await getCsrfToken({
             req: {
