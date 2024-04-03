@@ -3,6 +3,14 @@
 	"include": [
 		"."
 	],
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/*": [
+				"./*"
+			]
+		}
+	},
 	"exclude": [
 		"dist",
 		"build",

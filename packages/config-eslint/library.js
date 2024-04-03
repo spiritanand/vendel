@@ -23,6 +23,10 @@ module.exports = {
     React: true,
     JSX: true,
   },
+  rules: {
+    "import/no-default-export": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+  },
   settings: {
     "import/resolver": {
       typescript: {
