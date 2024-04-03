@@ -41,5 +41,6 @@ module.exports = {
   // add rules configurations here
   rules: {
     "import/no-default-export": "off",
+    "@typescript-eslint/explicit-function-return-type": "off", // TS is smart enough to infer return types
   },
 };
