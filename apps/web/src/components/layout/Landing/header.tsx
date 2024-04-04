@@ -6,13 +6,13 @@ export default async function Header() {
   const session = await auth();
 
   return (
-    <div>
+    <>
       {!session && <SignIn />}
       {session?.user ? (
         <>
-          {session.user.publicKey} <SignOut />
+          {session.user.id} <SignOut />
         </>
       ) : null}
-    </div>
+    </>
   );
 }

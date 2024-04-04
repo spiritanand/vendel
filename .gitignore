@@ -38,3 +38,6 @@ dist/
 
 # IDE
 .idea
+
+# DB
+drizzle/

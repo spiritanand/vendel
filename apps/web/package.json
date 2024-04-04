@@ -1,40 +1,49 @@
 {
-  "name": "web",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "type-check": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@repo/ui": "workspace:*",
-    "@solana-mobile/wallet-adapter-mobile": "^2.1.2",
-    "@solana/wallet-adapter-base": "^0.9.23",
-    "@solana/wallet-adapter-react": "^0.15.35",
-    "@solana/wallet-adapter-react-ui": "^0.9.35",
-    "@solana/wallet-adapter-wallets": "^0.19.32",
-    "@solana/web3.js": "^1.91.3",
-    "bs58": "^5.0.0",
-    "next": "^14.1.1",
-    "next-auth": "^4.24.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tweetnacl": "^1.0.3"
-  },
-  "devDependencies": {
-    "@next/eslint-plugin-next": "^14.1.1",
-    "@repo/eslint-config": "workspace:*",
-    "@repo/tailwind-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@types/node": "^20.11.24",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
-    "autoprefixer": "^10.4.18",
-    "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
-  }
+	"name": "web",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"type-check": "tsc --noEmit",
+		"generate:pg": "pnpm drizzle-kit generate:pg",
+		"push:pg": "pnpm drizzle-kit push:pg",
+		"studio": "pnpm generate:pg && pnpm push:pg && pnpm drizzle-kit studio --verbose"
+	},
+	"dependencies": {
+		"@auth/core": "^0.28.2",
+		"@auth/drizzle-adapter": "^0.8.2",
+		"@repo/ui": "workspace:*",
+		"@solana-mobile/wallet-adapter-mobile": "^2.1.2",
+		"@solana/wallet-adapter-base": "^0.9.23",
+		"@solana/wallet-adapter-react": "^0.15.35",
+		"@solana/wallet-adapter-react-ui": "^0.9.35",
+		"@solana/wallet-adapter-wallets": "^0.19.32",
+		"@solana/web3.js": "^1.91.3",
+		"bs58": "^5.0.0",
+		"drizzle-orm": "^0.30.7",
+		"next": "^14.1.1",
+		"next-auth": "^4.24.7",
+		"pg": "^8.11.5",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"tweetnacl": "^1.0.3"
+	},
+	"devDependencies": {
+		"@next/eslint-plugin-next": "^14.1.1",
+		"@repo/eslint-config": "workspace:*",
+		"@repo/tailwind-config": "workspace:*",
+		"@repo/typescript-config": "workspace:*",
+		"@types/node": "^20.11.24",
+		"@types/pg": "^8.11.4",
+		"@types/react": "^18.2.61",
+		"@types/react-dom": "^18.2.19",
+		"autoprefixer": "^10.4.18",
+		"drizzle-kit": "^0.20.14",
+		"postcss": "^8.4.35",
+		"tailwindcss": "^3.4.1",
+		"typescript": "^5.3.3"
+	}
 }

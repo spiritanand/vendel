@@ -8,7 +8,6 @@ declare module "next-auth" {
     user?: {
       // add custom session properties here
       id: string;
-      publicKey: string;
     } & DefaultSession["user"];
   }
 }
