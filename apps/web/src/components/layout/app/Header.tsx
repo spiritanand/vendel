@@ -20,10 +20,16 @@ import { Sheet, SheetContent, SheetTrigger } from "@repo/ui/ui/sheet.tsx";
 import { Button } from "@repo/ui/ui/button.tsx";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import AvatarMenu from "@/components/actions/AvatarMenu.tsx";
 
 function Header() {
+  const [openSideMenu, setOpenSideMenu] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setOpenSideMenu(false);
+  }, [pathname]);
 
   return (
     <>
@@ -116,7 +122,7 @@ function Header() {
       </aside>
 
       <header className="bg-background sticky top-0 z-30 flex h-14 items-center justify-between gap-4 border-b p-3 sm:hidden sm:h-auto sm:border-0 sm:bg-transparent">
-        <Sheet>
+        <Sheet onOpenChange={setOpenSideMenu} open={openSideMenu}>
           <SheetTrigger asChild>
             <Button
               className="px-0 py-0 sm:hidden"
@@ -137,28 +143,44 @@ function Header() {
                 <span className="sr-only">Vendel</span>
               </Link>
               <Link
-                className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
+                className={`${
+                  pathname === "/user/dashboard"
+                    ? "text-foreground "
+                    : " text-muted-foreground "
+                }hover:text-foreground flex items-center gap-4 px-2.5`}
                 href="/user/dashboard"
               >
                 <Home className="h-5 w-5" />
                 Dashboard
               </Link>
               <Link
-                className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
+                className={`${
+                  pathname === "/user/products"
+                    ? "text-foreground "
+                    : " text-muted-foreground "
+                }hover:text-foreground flex items-center gap-4 px-2.5`}
                 href="/user/products"
               >
                 <Package className="h-5 w-5" />
                 Products
               </Link>
               <Link
-                className="text-foreground flex items-center gap-4 px-2.5"
+                className={`${
+                  pathname === "/user/tx"
+                    ? "text-foreground "
+                    : " text-muted-foreground "
+                }hover:text-foreground flex items-center gap-4 px-2.5`}
                 href="/user/tx"
               >
                 <ArrowRightLeft className="h-5 w-5" />
                 Transactions
               </Link>
               <Link
-                className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
+                className={`${
+                  pathname === "/user/settings"
+                    ? "text-foreground "
+                    : " text-muted-foreground "
+                }hover:text-foreground flex items-center gap-4 px-2.5`}
                 href="/user/settings"
               >
                 <LineChart className="h-5 w-5" />
