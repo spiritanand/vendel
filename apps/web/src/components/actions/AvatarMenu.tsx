@@ -10,6 +10,7 @@ import { Button } from "@repo/ui/ui/button.tsx";
 import Image from "next/image";
 import SignOut from "@/components/actions/SignOut.tsx";
 import useGetBalance from "@/hooks/useGetBalance.ts";
+import Solana from "@/components/logos/Solana.tsx";
 
 function AvatarMenu() {
   const balance = useGetBalance();
@@ -36,7 +37,7 @@ function AvatarMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuLabel>Balances</DropdownMenuLabel>
         <DropdownMenuItem className="flex items-center gap-2">
-          <Image alt="solana" height={10} src="/sol-logo.svg" width={10} />
+          <Solana />
           {balance} SOL
         </DropdownMenuItem>
         <DropdownMenuSeparator />
