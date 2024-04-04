@@ -44,5 +44,6 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "off", // TS is smart enough to infer return types,
     "unicorn/filename-case": "off",
     "no-console": "warn",
+    "@typescript-eslint/no-misused-promises": "off",
   },
 };

@@ -32,7 +32,7 @@ function Page() {
           </div>
 
           <Link className="ml-auto" href="/user/products/create">
-            <Button className="shadow-primary/40 font-semibold shadow-xl">
+            <Button className="font-semibold">
               <BadgePlus className="mr-2" /> CREATE PRODUCT
             </Button>
           </Link>
@@ -43,7 +43,7 @@ function Page() {
             product in a few steps.
           </p>
           <Link href="/user/products/create">
-            <Button className="shadow-primary/40 font-semibold shadow-xl">
+            <Button className="font-semibold">
               <BadgePlus className="mr-2" /> CREATE PRODUCT
             </Button>
           </Link>
