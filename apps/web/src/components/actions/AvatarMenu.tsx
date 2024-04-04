@@ -9,8 +9,11 @@ import {
 import { Button } from "@repo/ui/ui/button.tsx";
 import Image from "next/image";
 import SignOut from "@/components/actions/SignOut.tsx";
+import useGetBalance from "@/hooks/useGetBalance.ts";
 
 function AvatarMenu() {
+  const balance = useGetBalance();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="sm:mx-auto">
@@ -30,6 +33,12 @@ function AvatarMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel>Balances</DropdownMenuLabel>
+        <DropdownMenuItem className="flex items-center gap-2">
+          <Image alt="solana" height={10} src="/sol-logo.svg" width={10} />
+          {balance} SOL
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <SignOut />
