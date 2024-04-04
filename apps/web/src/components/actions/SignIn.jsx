@@ -35,7 +35,7 @@ function SignIn() {
       await signIn("credentials", {
         message: JSON.stringify(message),
         signature: serializedSignature,
-        // callbackUrl: "/user/dashboard",
+        callbackUrl: "/user/dashboard",
       });
     } catch (error) {
       console.error("Failed to sign in", error);
