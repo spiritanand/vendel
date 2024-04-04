@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import {
+  ArrowRightLeft,
   Home,
   LineChart,
+  LucideLayoutDashboard,
   Package,
   PanelLeft,
   Settings,
-  ShoppingCart,
-  Users2,
 } from "lucide-react";
 import {
   Tooltip,
@@ -47,37 +47,23 @@ function Header() {
                   } hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8`}
                   href="/user/dashboard"
                 >
-                  <Home className="h-5 w-5" />
+                  <LucideLayoutDashboard className="h-5 w-5" />
                   <span className="sr-only">Dashboard</span>
                 </Link>
               </TooltipTrigger>
               <TooltipContent side="right">Dashboard</TooltipContent>
             </Tooltip>
+
+            {/*Products*/}
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
                   className={`${
-                    pathname === "/user/dashboard"
+                    pathname === "/user/products"
                       ? "text-accent-foreground"
                       : "text-muted-foreground"
                   } hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8`}
-                  href="#"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                  <span className="sr-only">Orders</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Orders</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  className={`${
-                    pathname === "/user/dashboard"
-                      ? "text-accent-foreground"
-                      : "text-muted-foreground"
-                  } hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8`}
-                  href="#"
+                  href="/user/products"
                 >
                   <Package className="h-5 w-5" />
                   <span className="sr-only">Products</span>
@@ -85,37 +71,23 @@ function Header() {
               </TooltipTrigger>
               <TooltipContent side="right">Products</TooltipContent>
             </Tooltip>
+
+            {/*TX*/}
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
                   className={`${
-                    pathname === "/user/dashboard"
+                    pathname === "/user/tx"
                       ? "text-accent-foreground"
                       : "text-muted-foreground"
                   } hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8`}
-                  href="#"
+                  href="/user/tx"
                 >
-                  <Users2 className="h-5 w-5" />
-                  <span className="sr-only">Customers</span>
+                  <ArrowRightLeft className="h-5 w-5" />
+                  <span className="sr-only">Transactions</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Customers</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  className={`${
-                    pathname === "/user/dashboard"
-                      ? "text-accent-foreground"
-                      : "text-muted-foreground"
-                  } hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8`}
-                  href="#"
-                >
-                  <LineChart className="h-5 w-5" />
-                  <span className="sr-only">Analytics</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Analytics</TooltipContent>
+              <TooltipContent side="right">Transactions</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </nav>
@@ -125,11 +97,11 @@ function Header() {
               <TooltipTrigger asChild>
                 <Link
                   className={`${
-                    pathname === "/user/dashboard"
+                    pathname === "/user/settings"
                       ? "text-accent-foreground"
                       : "text-muted-foreground"
                   } hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8`}
-                  href="#"
+                  href="/user/settings"
                 >
                   <Settings className="h-5 w-5" />
                   <span className="sr-only">Settings</span>
@@ -159,42 +131,35 @@ function Header() {
             <nav className="grid gap-6 text-lg font-medium">
               <Link
                 className="bg-primary text-primary-foreground group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold md:text-base"
-                href="#"
+                href="/user/dashboard"
               >
                 <Image alt="Vendel" height={50} src="/logo.png" width={50} />
                 <span className="sr-only">Vendel</span>
               </Link>
               <Link
                 className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
-                href="#"
+                href="/user/dashboard"
               >
                 <Home className="h-5 w-5" />
                 Dashboard
               </Link>
               <Link
-                className="text-foreground flex items-center gap-4 px-2.5"
-                href="#"
-              >
-                <ShoppingCart className="h-5 w-5" />
-                Orders
-              </Link>
-              <Link
                 className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
-                href="#"
+                href="/user/products"
               >
                 <Package className="h-5 w-5" />
                 Products
               </Link>
               <Link
-                className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
-                href="#"
+                className="text-foreground flex items-center gap-4 px-2.5"
+                href="/user/tx"
               >
-                <Users2 className="h-5 w-5" />
-                Customers
+                <ArrowRightLeft className="h-5 w-5" />
+                Transactions
               </Link>
               <Link
                 className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
-                href="#"
+                href="/user/settings"
               >
                 <LineChart className="h-5 w-5" />
                 Settings
