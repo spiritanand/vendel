@@ -31,7 +31,7 @@ function Page() {
             </div>
           </div>
 
-          <Link className="ml-auto" href="/user/products/create">
+          <Link className="ml-auto" href="/user/products/create/basics">
             <Button className="font-semibold">
               <BadgePlus className="mr-2" /> CREATE PRODUCT
             </Button>
@@ -42,7 +42,7 @@ function Page() {
             Set up your products for sale like NFTs, e-commerce or any digital
             product in a few steps.
           </p>
-          <Link href="/user/products/create">
+          <Link href="/user/products/create/basics">
             <Button className="font-semibold">
               <BadgePlus className="mr-2" /> CREATE PRODUCT
             </Button>

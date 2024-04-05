@@ -12,22 +12,15 @@ import {
 import { Input } from "@repo/ui/ui/input.tsx";
 import { Button } from "@repo/ui/ui/button.tsx";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import type { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Asterisk } from "lucide-react";
+import { ArrowBigRight, Asterisk } from "lucide-react";
 import Solana from "@/components/logos/Solana.tsx";
+import { basicFormSchema } from "@/libWeb/zodSchemas.ts";
 
-const formSchema = z.object({
-  name: z.string().min(3, {
-    message: "Name must be at least 3 characters.",
-  }),
-  description: z.string(),
-  price: z.number().positive(),
-});
-
-export function CreateProductForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+export default function CreateProductForm() {
+  const form = useForm<z.infer<typeof basicFormSchema>>({
+    resolver: zodResolver(basicFormSchema),
     defaultValues: {
       name: "",
       description: "",
@@ -35,7 +28,7 @@ export function CreateProductForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof basicFormSchema>) {
     console.log(values);
   }
 
@@ -108,7 +101,9 @@ export function CreateProductForm() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          Next <ArrowBigRight className="ml-2" />
+        </Button>
       </form>
     </Form>
   );

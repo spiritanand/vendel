@@ -1,16 +1,19 @@
 import { SquarePen } from "lucide-react";
-import { CreateProductForm } from "@/app/(authenticated)/user/products/create/CreateProductForm.tsx";
+import Stepper from "@/app/(authenticated)/user/products/create/stepper.tsx";
 
-function Page() {
+function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <h1 className="flex items-center gap-2 text-3xl font-bold">
         <SquarePen className="h-5 w-5" />
         Create
       </h1>
-      <CreateProductForm />
+
+      <Stepper />
+
+      {children}
     </>
   );
 }
 
-export default Page;
+export default Layout;
