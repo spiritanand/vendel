@@ -6,7 +6,7 @@ import type {
 } from "@/libWeb/zodSchemas.ts";
 
 interface FormSteps {
-  step: "basic" | "advanced";
+  step: "basics" | "advanced";
 }
 
 type BASIC = z.infer<typeof basicFormSchema>;
@@ -15,13 +15,14 @@ type ADVANCED = z.infer<typeof advancedFormSchema>;
 type STATE = FormSteps & BASIC & ADVANCED;
 
 interface ACTIONS {
+  updateStep: (values: FormSteps) => void;
   setBasicForm: (values: BASIC) => void;
   setAdvancedForm: (values: ADVANCED) => void;
   resetForm: () => void;
 }
 
 const initState: STATE = {
-  step: "basic",
+  step: "basics",
   name: "",
   description: "",
   price: 0,
@@ -30,8 +31,11 @@ const initState: STATE = {
   tags: [],
 };
 
-const useCreateProductStore = create<STATE & ACTIONS>((set) => ({
+export const useCreateProductStore = create<STATE & ACTIONS>((set) => ({
   ...initState,
+  updateStep: (values) => {
+    set({ step: values.step });
+  },
   setBasicForm: (values) => {
     set(values);
   },
