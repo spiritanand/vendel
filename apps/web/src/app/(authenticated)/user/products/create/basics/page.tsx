@@ -25,6 +25,7 @@ export default function CreateProductForm() {
       name: "",
       description: "",
       price: 0,
+      image: "",
     },
   });
 
@@ -43,7 +44,7 @@ export default function CreateProductForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="flex items-center">
+              <FormLabel className="flex items-center text-lg">
                 Name <Asterisk className="h-2 self-start" width={13} />
               </FormLabel>
               <FormControl>
@@ -65,7 +66,7 @@ export default function CreateProductForm() {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel className="text-lg">Description</FormLabel>
               <FormControl>
                 <Input placeholder="why is it so cool?" {...field} />
               </FormControl>
@@ -82,7 +83,7 @@ export default function CreateProductForm() {
           name="price"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="flex items-center gap-2">
+              <FormLabel className="flex items-center gap-2 text-lg">
                 Price (in <Solana /> SOL){" "}
                 <Asterisk className="h-2 self-start" width={13} />
               </FormLabel>

@@ -27,8 +27,8 @@ const initState: STATE = {
   description: "",
   price: 0,
   image: "",
-  category: "",
-  tags: [],
+  split: { isSplit: false },
+  quantity: 0,
 };
 
 export const useCreateProductStore = create<STATE & ACTIONS>((set) => ({
