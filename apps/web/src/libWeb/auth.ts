@@ -7,9 +7,9 @@ import type { NextAuthOptions } from "next-auth";
 import { getServerSession } from "next-auth";
 import CustomCredentialsProvider from "next-auth/providers/credentials";
 import { getCsrfToken } from "next-auth/react";
+import { db } from "@repo/db";
+import { users } from "@repo/db/schema";
 import { SigninMessage } from "@/libWeb/utils/SigninMessage.ts";
-import { db } from "@/libWeb/db";
-import { users } from "@/libWeb/db/schema.ts";
 
 export const config = {
   providers: [

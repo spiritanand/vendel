@@ -17,6 +17,7 @@
 		"@auth/drizzle-adapter": "^0.8.2",
 		"@hookform/resolvers": "^3.3.4",
 		"@repo/ui": "workspace:*",
+		"@repo/db": "workspace:*",
 		"@solana-mobile/wallet-adapter-mobile": "^2.1.2",
 		"@solana/wallet-adapter-base": "^0.9.23",
 		"@solana/wallet-adapter-react": "^0.15.35",
