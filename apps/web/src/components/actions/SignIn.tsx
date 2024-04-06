@@ -8,9 +8,11 @@ import { Button } from "@repo/ui/ui/button";
 import { SigninMessage } from "@/libWeb/utils/SigninMessage";
 import { ROUTES } from "@/libWeb/constants";
 
-function SignIn() {
+function SignIn({ callbackUrl = ROUTES.PRODUCTS }: { callbackUrl?: string }) {
   const wallet = useWallet();
   const walletModal = useWalletModal();
+
+  const callback = callbackUrl === "#" ? window.location.href : callbackUrl;
 
   const handleSignIn = async () => {
     try {
@@ -34,7 +36,7 @@ function SignIn() {
       await signIn("credentials", {
         message: JSON.stringify(message),
         signature: serializedSignature,
-        callbackUrl: ROUTES.PRODUCTS,
+        callbackUrl: callback,
       });
     } catch (error) {
       console.error("Failed to sign in", error);

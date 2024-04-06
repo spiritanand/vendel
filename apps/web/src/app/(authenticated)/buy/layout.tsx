@@ -1,7 +1,9 @@
+import Header from "@/components/layout/app/buy/Header";
+
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header>HEAD</header>
+      <Header />
       <main>{children}</main>
     </>
   );

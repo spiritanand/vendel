@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,12 +10,13 @@ import {
 } from "@repo/ui/ui/dropdown-menu.tsx";
 import { Button } from "@repo/ui/ui/button.tsx";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 import SignOut from "@/components/actions/SignOut.tsx";
 import useGetBalance from "@/hooks/useGetBalance.ts";
 import Solana from "@/components/logos/Solana.tsx";
-import SignIn from "@/components/actions/SignIn";
 
 function AvatarMenu() {
+  const session = useSession();
   const balance = useGetBalance();
 
   return (
@@ -28,7 +31,7 @@ function AvatarMenu() {
             alt="Avatar"
             className="overflow-hidden"
             height={100}
-            src="https://robohash.org/9f5pd6Uq5kjN96cnesnnpSsErM9tjELUoTShzTkwvyDn"
+            src={session.data?.user?.image ?? ""}
             width={100}
           />
         </Button>
@@ -43,7 +46,6 @@ function AvatarMenu() {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <SignIn />
           <SignOut />
         </DropdownMenuItem>
       </DropdownMenuContent>
