@@ -1,8 +1,6 @@
 import "@repo/ui/styles.css";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { auth } from "@/libWeb/auth.ts";
-import Providers from "./Providers";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -16,18 +14,14 @@ export const metadata: Metadata = {
   description: "Power you checkouts using crypto payments",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
-
   return (
     <html lang="en">
-      <body className={`${poppins.className} dark`}>
-        <Providers session={session}>{children}</Providers>
-      </body>
+      <body className={`${poppins.className} dark`}>{children}</body>
     </html>
   );
 }

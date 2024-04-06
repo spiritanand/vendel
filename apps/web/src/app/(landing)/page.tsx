@@ -1,5 +1,5 @@
 import { Button } from "@repo/ui/ui/button.tsx";
-import Header from "@/components/layout/Landing/header";
+import Header from "@/components/layout/Landing/header.tsx";
 import "@solana/wallet-adapter-react-ui/styles.css";
 
 function Page() {
