@@ -1,4 +1,10 @@
-import { doublePrecision, json, pgTable, text } from "drizzle-orm/pg-core";
+import {
+  doublePrecision,
+  json,
+  pgTable,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
 import { createId } from "@paralleldrive/cuid2";
 import { QuantityType, SplitType } from "@/libWeb/zodSchemas";
 
@@ -24,6 +30,9 @@ export const products = pgTable("product", {
     .default({ isLimited: false })
     .notNull(),
   split: json("split").$type<SplitType>().default({ isSplit: false }).notNull(),
+  createdAt: timestamp("createdAt", { mode: "string" })
+    .$defaultFn(() => new Date().toISOString())
+    .notNull(),
 });
 export type SelectProduct = typeof products.$inferSelect;
 export type InsertProduct = typeof products.$inferInsert;

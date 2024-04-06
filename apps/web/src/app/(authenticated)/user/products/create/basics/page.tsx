@@ -101,7 +101,6 @@ export default function CreateProductForm() {
               <FormControl>
                 <Input
                   placeholder="dApper NFT name or any other product name"
-                  type="number"
                   {...field}
                 />
               </FormControl>

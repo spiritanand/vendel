@@ -3,9 +3,7 @@
 import Link from "next/link";
 import {
   ArrowRightLeft,
-  Home,
   LineChart,
-  LucideLayoutDashboard,
   Package,
   PanelLeft,
   Settings,
@@ -43,23 +41,6 @@ function Header() {
             <span className="sr-only">Vendel</span>
           </Link>
           <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  className={`${
-                    pathname === "/user/dashboard"
-                      ? "text-accent-foreground"
-                      : "text-muted-foreground"
-                  } hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8`}
-                  href="/user/dashboard"
-                >
-                  <LucideLayoutDashboard className="h-5 w-5" />
-                  <span className="sr-only">Dashboard</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Dashboard</TooltipContent>
-            </Tooltip>
-
             {/*Products*/}
             <Tooltip>
               <TooltipTrigger asChild>
@@ -141,17 +122,6 @@ function Header() {
               >
                 <Image alt="Vendel" height={50} src="/logo.png" width={50} />
                 <span className="sr-only">Vendel</span>
-              </Link>
-              <Link
-                className={`${
-                  pathname === "/user/dashboard"
-                    ? "text-foreground "
-                    : " text-muted-foreground "
-                }hover:text-foreground flex items-center gap-4 px-2.5`}
-                href="/user/dashboard"
-              >
-                <Home className="h-5 w-5" />
-                Dashboard
               </Link>
               <Link
                 className={`${

@@ -22,16 +22,15 @@ import { toast } from "@repo/ui/ui/toaster";
 import { advancedFormSchema } from "@/libWeb/zodSchemas.ts";
 import { trpc } from "@/app/(authenticated)/_trpc/client.ts";
 import { useCreateProductStore } from "@/store/createProduct.ts";
+import { ROUTES } from "@/libWeb/constants.ts";
 
 export default function CreateProductForm() {
   const router = useRouter();
-  const step = useCreateProductStore.use.step();
-  const isBasic = step === "basics";
-  if (isBasic) router.push("/user/products/create/basics");
 
   const basicForm = useCreateProductStore.use.getBasicForm()();
   const resetForm = useCreateProductStore.use.resetForm();
 
+  const trpcUtils = trpc.useUtils();
   const addProduct = trpc.product.add.useMutation();
 
   const form = useForm<z.infer<typeof advancedFormSchema>>({
@@ -81,10 +80,14 @@ export default function CreateProductForm() {
         ...advancedForm,
       },
       {
-        onSuccess: ({ message }) => {
+        onSuccess: async ({ message }) => {
           toast.success(message);
 
           resetForm();
+
+          await trpcUtils.product.getAll.invalidate();
+
+          router.push(ROUTES.PRODUCTS);
         },
         onError: () => {
           toast.error("Failed to add product.");
