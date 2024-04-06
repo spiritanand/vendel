@@ -49,7 +49,7 @@ function Buy({ product }: { product: SelectProduct }) {
         from: publicKey.toBase58(),
         to: product.userId,
         amount: price,
-        productName: product.name,
+        productId: product.id,
       });
 
       toast.success("Transaction Successful");

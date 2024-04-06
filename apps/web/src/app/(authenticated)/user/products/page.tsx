@@ -2,10 +2,11 @@ import { Package } from "lucide-react";
 import Stats from "@/app/(authenticated)/user/products/Stats.tsx";
 import AllProducts from "@/app/(authenticated)/user/products/AllProducts.tsx";
 import CreateProductBtn from "@/app/(authenticated)/user/products/create/CreateProductBtn.tsx";
-import { getAllProducts } from "@/libWeb/dbQueries.ts";
+import { getAllProducts, getInTx } from "@/libWeb/dbQueries.ts";
 
 async function Page() {
   const allProducts = await getAllProducts();
+  const allInTxs = await getInTx();
 
   return (
     <>
@@ -18,7 +19,7 @@ async function Page() {
         <Stats />
 
         {allProducts.length > 0 ? (
-          <AllProducts allProducts={allProducts} />
+          <AllProducts allInTxs={allInTxs} allProducts={allProducts} />
         ) : (
           <div className="mx-auto my-8 max-w-2xl rounded-lg p-6 shadow-md">
             <p className="mb-4 text-sm text-gray-400">

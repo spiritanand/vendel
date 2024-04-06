@@ -7,6 +7,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { createId } from "@paralleldrive/cuid2";
 import { QuantityType, SplitType } from "@/libWeb/zodSchemas";
+import { relations } from "drizzle-orm";
 
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),
@@ -45,7 +46,9 @@ export const transactions = pgTable("transactions", {
   to: text("to")
     .notNull()
     .references(() => users.id),
-  productName: text("product").notNull(),
+  productId: text("productId")
+    .notNull()
+    .references(() => products.id),
   amount: doublePrecision("amount").notNull(),
   createdAt: timestamp("createdAt", { mode: "string" })
     .$defaultFn(() => new Date().toISOString())
@@ -54,16 +57,15 @@ export const transactions = pgTable("transactions", {
 export type SelectTx = typeof transactions.$inferSelect;
 export type InsertTx = typeof transactions.$inferInsert;
 
-
 // Relations
 
 // export const formsRelations = relations(forms, ({ many }) => ({
 //   pages: many(pages),
 //   responses: many(responses),
 // }));
-// export const pagesRelations = relations(pages, ({ one }) => ({
-//   form: one(forms, {
-//     fields: [pages.formId],
-//     references: [forms.id],
-//   }),
-// }));
+export const txRelations = relations(transactions, ({ one }) => ({
+  form: one(products, {
+    fields: [transactions.productId],
+    references: [products.id],
+  }),
+}));

@@ -19,7 +19,15 @@ import { toast } from "@repo/ui/ui/toaster";
 import Solana from "@/components/logos/Solana.tsx";
 import { trpc } from "@/app/(authenticated)/_trpc/client.ts";
 
-function ProductCard({ product }: { product: SelectProduct }) {
+function ProductCard({
+  product,
+  sales,
+  volume,
+}: {
+  product: SelectProduct;
+  sales: number;
+  volume: number;
+}) {
   const trpcUtils = trpc.useUtils();
   const deleteProduct = trpc.product.delete.useMutation();
 
@@ -66,14 +74,14 @@ function ProductCard({ product }: { product: SelectProduct }) {
         <div className="flex items-center">
           <div>
             <div className="text-sm text-gray-500">Volume</div>
-            <div className="text-lg font-semibold">0</div>
+            <div className="text-lg font-semibold">{volume}</div>
           </div>
         </div>
         <div>
           <div className="text-sm text-gray-500">Sales</div>
           <div className="flex gap-3 text-lg font-semibold">
             <Solana />
-            <p>{0.0} SOL</p>
+            <p>{sales} SOL</p>
           </div>
         </div>
       </CardContent>
