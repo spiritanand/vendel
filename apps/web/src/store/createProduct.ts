@@ -20,6 +20,7 @@ interface ACTIONS {
   setBasicForm: (values: BASIC) => void;
   setAdvancedForm: (values: ADVANCED) => void;
   resetForm: () => void;
+  getBasicForm: () => BASIC;
 }
 
 const initState: STATE = {
@@ -29,11 +30,17 @@ const initState: STATE = {
   price: 0,
   image: "",
   split: { isSplit: false },
-  quantity: 0,
+  quantity: { isLimited: false },
 };
 
-export const useCreateProductBase = create<STATE & ACTIONS>((set) => ({
+export const useCreateProductBase = create<STATE & ACTIONS>((set, get) => ({
   ...initState,
+  getBasicForm: () => ({
+    name: get().name,
+    description: get().description,
+    price: get().price,
+    image: get().image,
+  }),
   updateStep: (values) => {
     set({ step: values.step });
   },

@@ -15,22 +15,33 @@ import { useForm } from "react-hook-form";
 import type { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowBigRight, Asterisk } from "lucide-react";
+import { useRouter } from "next/navigation";
 import Solana from "@/components/logos/Solana.tsx";
 import { basicFormSchema } from "@/libWeb/zodSchemas.ts";
+import { useCreateProductStore } from "@/store/createProduct.ts";
 
 export default function CreateProductForm() {
+  const router = useRouter();
+
+  const basicForm = useCreateProductStore.use.getBasicForm()();
+  const setBasicForm = useCreateProductStore.use.setBasicForm();
+  const updateStep = useCreateProductStore.use.updateStep();
+
   const form = useForm<z.infer<typeof basicFormSchema>>({
     resolver: zodResolver(basicFormSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      price: 0,
-      image: "",
+      name: basicForm.name,
+      description: basicForm.description,
+      price: basicForm.price,
+      image: basicForm.image,
     },
   });
 
   function onSubmit(values: z.infer<typeof basicFormSchema>) {
-    console.log(values);
+    setBasicForm(values);
+    updateStep({ step: "advanced" });
+
+    router.push("/user/products/create/advanced");
   }
 
   return (

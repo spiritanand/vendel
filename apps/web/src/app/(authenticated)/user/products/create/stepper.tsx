@@ -5,13 +5,13 @@ import Link from "next/link";
 import { useCreateProductStore } from "@/store/createProduct.ts";
 
 function Stepper() {
-  const step = useCreateProductStore().step;
+  const step = useCreateProductStore.use.step();
 
   const isBasic = step === "basics";
   const isAdvanced = step === "advanced";
 
   return (
-    <ol className="mx-auto flex w-1/2 items-center px-16 py-4 text-center text-sm font-medium text-gray-500 sm:text-base dark:text-gray-500">
+    <ol className="container mx-auto flex w-1/2 items-center px-16 py-4 text-center text-sm font-medium text-gray-500 sm:text-base dark:text-gray-500">
       <li
         className={`after:border-1 flex items-center ${
           isBasic ? "text-gray-300" : "text-green-600 dark:text-green-500"
