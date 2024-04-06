@@ -64,7 +64,7 @@ function Header() {
               <TooltipTrigger asChild>
                 <Link
                   className={`${
-                    pathname === "/user/tx"
+                    pathname === "/user/transactions"
                       ? "text-accent-foreground"
                       : "text-muted-foreground"
                   } hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8`}
@@ -136,7 +136,7 @@ function Header() {
               </Link>
               <Link
                 className={`${
-                  pathname === "/user/tx"
+                  pathname === "/user/transactions"
                     ? "text-foreground "
                     : " text-muted-foreground "
                 }hover:text-foreground flex items-center gap-4 px-2.5`}

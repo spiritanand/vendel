@@ -1,3 +1,4 @@
+import type { InsertTx } from "@repo/db/schema";
 import { z } from "zod";
 
 export const basicFormSchema = z.object({
@@ -48,3 +49,5 @@ export const formSchema = basicFormSchema.merge(advancedFormSchema);
 export const doByIdSchema = z.object({
   id: z.string(),
 });
+
+export const insertTx = z.custom<InsertTx>();

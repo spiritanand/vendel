@@ -9,6 +9,7 @@ import { useMemo } from "react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { SessionProvider } from "next-auth/react";
 import type { Session } from "next-auth";
+import "@solana/wallet-adapter-react-ui/styles.css";
 
 function WalletProviders({
   children,

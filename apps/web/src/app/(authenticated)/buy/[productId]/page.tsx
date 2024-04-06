@@ -11,12 +11,10 @@ import {
 } from "@repo/ui/ui/card.tsx";
 import { redirect } from "next/navigation";
 import Solana from "@/components/logos/Solana";
-import { auth } from "@/libWeb/auth.ts";
 import Buy from "./Buy";
 
 async function Page({ params }: { params: { productId: string } }) {
   const { productId } = params;
-  const session = await auth();
 
   const product = await db.query.products.findFirst({
     where: eq(products.id, productId),

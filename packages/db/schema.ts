@@ -37,6 +37,24 @@ export const products = pgTable("product", {
 export type SelectProduct = typeof products.$inferSelect;
 export type InsertProduct = typeof products.$inferInsert;
 
+export const transactions = pgTable("transactions", {
+  id: text("id").notNull().primaryKey(),
+  from: text("from")
+    .notNull()
+    .references(() => users.id),
+  to: text("to")
+    .notNull()
+    .references(() => users.id),
+  productName: text("product").notNull(),
+  amount: doublePrecision("amount").notNull(),
+  createdAt: timestamp("createdAt", { mode: "string" })
+    .$defaultFn(() => new Date().toISOString())
+    .notNull(),
+});
+export type SelectTx = typeof transactions.$inferSelect;
+export type InsertTx = typeof transactions.$inferInsert;
+
+
 // Relations
 
 // export const formsRelations = relations(forms, ({ many }) => ({
