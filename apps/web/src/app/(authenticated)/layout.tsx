@@ -1,10 +1,8 @@
-import Providers from "@/app/(authenticated)/Providers.tsx";
-import { auth } from "@/libWeb/auth.ts";
+import TrpcProviders from "@/app/(authenticated)/TrpcProviders.tsx";
+import "@solana/wallet-adapter-react-ui/styles.css";
 
-async function Layout({ children }: { children: React.ReactNode }) {
-  const session = await auth();
-
-  return <Providers session={session}>{children}</Providers>;
+function Layout({ children }: { children: React.ReactNode }) {
+  return <TrpcProviders>{children}</TrpcProviders>;
 }
 
 export default Layout;

@@ -5,13 +5,12 @@ import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { getCsrfToken, signIn } from "next-auth/react";
 import bs58 from "bs58";
 import { Button } from "@repo/ui/ui/button";
-// import { useRouter } from "next/navigation";
 import { SigninMessage } from "@/libWeb/utils/SigninMessage";
+import { ROUTES } from "@/libWeb/constants";
 
 function SignIn() {
   const wallet = useWallet();
   const walletModal = useWalletModal();
-  // const router = useRouter();
 
   const handleSignIn = async () => {
     try {
@@ -35,7 +34,7 @@ function SignIn() {
       await signIn("credentials", {
         message: JSON.stringify(message),
         signature: serializedSignature,
-        callbackUrl: "/user/dashboard",
+        callbackUrl: ROUTES.PRODUCTS,
       });
     } catch (error) {
       console.error("Failed to sign in", error);

@@ -11,6 +11,7 @@ import Image from "next/image";
 import SignOut from "@/components/actions/SignOut.tsx";
 import useGetBalance from "@/hooks/useGetBalance.ts";
 import Solana from "@/components/logos/Solana.tsx";
+import SignIn from "@/components/actions/SignIn";
 
 function AvatarMenu() {
   const balance = useGetBalance();
@@ -42,6 +43,7 @@ function AvatarMenu() {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
+          <SignIn />
           <SignOut />
         </DropdownMenuItem>
       </DropdownMenuContent>

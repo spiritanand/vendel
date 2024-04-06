@@ -24,7 +24,9 @@ function ProductCard({ product }: { product: SelectProduct }) {
   const deleteProduct = trpc.product.delete.useMutation();
 
   async function handleCopyLink() {
-    await navigator.clipboard.writeText(`${window.location.origin}/hahaha`);
+    await navigator.clipboard.writeText(
+      `${window.location.origin}/buy/${product.id}`,
+    );
 
     toast.success("Copied to clipboard");
   }
@@ -80,13 +82,12 @@ function ProductCard({ product }: { product: SelectProduct }) {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="secondary">
+              <Button onClick={handleCopyLink} variant="secondary">
                 <Share2 />
               </Button>
             </TooltipTrigger>
             <TooltipContent
               className="bg-secondary text-secondary-foreground"
-              onClick={handleCopyLink}
               side="bottom"
             >
               Share
