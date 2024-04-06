@@ -4,6 +4,7 @@ import type {
   advancedFormSchema,
   basicFormSchema,
 } from "@/libWeb/zodSchemas.ts";
+import { createSelectors } from "@/store/createSelectors.ts";
 
 interface FormSteps {
   step: "basics" | "advanced";
@@ -31,7 +32,7 @@ const initState: STATE = {
   quantity: 0,
 };
 
-export const useCreateProductStore = create<STATE & ACTIONS>((set) => ({
+export const useCreateProductBase = create<STATE & ACTIONS>((set) => ({
   ...initState,
   updateStep: (values) => {
     set({ step: values.step });
@@ -46,3 +47,5 @@ export const useCreateProductStore = create<STATE & ACTIONS>((set) => ({
     set(initState);
   },
 }));
+
+export const useCreateProductStore = createSelectors(useCreateProductBase);

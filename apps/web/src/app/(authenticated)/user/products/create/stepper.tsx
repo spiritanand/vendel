@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useCreateProductStore } from "@/store/createProduct.ts";
 
 function Stepper() {
-  const step = useCreateProductStore((state) => state.step);
+  const step = useCreateProductStore().step;
 
   const isBasic = step === "basics";
   const isAdvanced = step === "advanced";
