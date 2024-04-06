@@ -44,3 +44,7 @@ export const advancedFormSchema = z.object({
 });
 
 export const formSchema = basicFormSchema.merge(advancedFormSchema);
+
+export const doByIdSchema = z.object({
+  id: z.string(),
+});

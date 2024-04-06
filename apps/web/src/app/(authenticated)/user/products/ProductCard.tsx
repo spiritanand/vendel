@@ -15,9 +15,37 @@ import {
   TooltipTrigger,
 } from "@repo/ui/ui/tooltip.tsx";
 import { Share2, Trash2 } from "lucide-react";
+import { toast } from "@repo/ui/ui/toaster";
 import Solana from "@/components/logos/Solana.tsx";
+import { trpc } from "@/app/(authenticated)/_trpc/client.ts";
 
 function ProductCard({ product }: { product: SelectProduct }) {
+  const trpcUtils = trpc.useUtils();
+  const deleteProduct = trpc.product.delete.useMutation();
+
+  async function handleCopyLink() {
+    await navigator.clipboard.writeText(`${window.location.origin}/hahaha`);
+
+    toast.success("Copied to clipboard");
+  }
+
+  function handleDelete() {
+    deleteProduct.mutate(
+      { id: product.id },
+      {
+        onSuccess: ({ message }) => {
+          toast.success(message);
+        },
+        onError: () => {
+          toast.error("Failed to delete product.");
+        },
+        onSettled: async () => {
+          await trpcUtils.product.getAll.invalidate();
+        },
+      },
+    );
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -58,6 +86,7 @@ function ProductCard({ product }: { product: SelectProduct }) {
             </TooltipTrigger>
             <TooltipContent
               className="bg-secondary text-secondary-foreground"
+              onClick={handleCopyLink}
               side="bottom"
             >
               Share
@@ -66,7 +95,11 @@ function ProductCard({ product }: { product: SelectProduct }) {
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="destructive">
+              <Button
+                disabled={deleteProduct.isPending}
+                onClick={handleDelete}
+                variant="destructive"
+              >
                 <Trash2 />
               </Button>
             </TooltipTrigger>
