@@ -89,12 +89,12 @@ function Buy({ product }: { product: SelectProduct }) {
 
       {isOwner ? (
         <p className="text-sm text-gray-300">
-          Note: You own this product. You can't buy your own product.
+          Note: You own this product. You cannot buy your own product.
         </p>
       ) : null}
 
       <p className="text-sm text-gray-500">
-        Disclaimer: This is a DeFi payment that can't be reversed. Funds go
+        Disclaimer: This is a DeFi payment that cannot be reversed. Funds go
         directly to the merchant.
       </p>
     </>
