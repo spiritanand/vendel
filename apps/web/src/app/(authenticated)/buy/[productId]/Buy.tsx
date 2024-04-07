@@ -7,13 +7,13 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import * as web3 from "@solana/web3.js";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { toast } from "@repo/ui/ui/toaster";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { ExternalLink } from "lucide-react";
 import useGetBalance from "@/hooks/useGetBalance.ts";
 import { trpc } from "@/app/(authenticated)/_trpc/client.ts";
 
 function Buy({ product }: { product: SelectProduct }) {
   const session = useSession();
-  const router = useRouter();
 
   const { publicKey, sendTransaction } = useWallet();
   const { connection } = useConnection();
@@ -25,6 +25,9 @@ function Buy({ product }: { product: SelectProduct }) {
 
   const balance = useGetBalance();
   const isSufficient = balance >= price;
+
+  const [isSuccess, setIsSuccess] = useState(true);
+  const [txSig, setTxSig] = useState("HOLA");
 
   const sendSol = async () => {
     if (!publicKey) return;
@@ -63,7 +66,9 @@ function Buy({ product }: { product: SelectProduct }) {
       });
 
       toast.success("Transaction Successful");
-      router.push("/user/tx");
+
+      setTxSig(sig);
+      setIsSuccess(true);
     } catch (e) {
       toast.error("Transaction Failed ");
     }
@@ -71,32 +76,52 @@ function Buy({ product }: { product: SelectProduct }) {
 
   return (
     <>
-      <Button
-        className="bg-gradient-to-tl from-neutral-200 via-teal-300 to-sky-200 text-xl font-black shadow-sm shadow-teal-300 hover:bg-gradient-to-bl hover:shadow-xl"
-        disabled={
-          !isSufficient || isOwner || !session.data?.user || addTx.isPending
-        }
-        onClick={sendSol}
-      >
-        Pay
-      </Button>
+      {isSuccess ? (
+        <>
+          <p className="text-primary text-3xl font-black">
+            Transaction Successful
+          </p>
+          <p className="text-xs text-gray-500">You can close this window now</p>
 
-      {!session.data?.user ? (
-        <p className="text-sm text-gray-300">
-          Note: You must login with a wallet to buy this product.
-        </p>
-      ) : null}
+          <a
+            className="ml-2 flex w-fit items-center gap-2 rounded-md bg-gray-700 p-2 text-xs text-blue-500"
+            href={`https://explorer.solana.com/address/${txSig}?cluster=devnet`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View Transaction <ExternalLink width={15} />
+          </a>
+        </>
+      ) : (
+        <>
+          <Button
+            className="bg-gradient-to-tl from-neutral-200 via-teal-300 to-sky-200 text-xl font-black shadow-sm shadow-teal-300 hover:bg-gradient-to-bl hover:shadow-xl"
+            disabled={
+              !isSufficient || isOwner || !session.data?.user || addTx.isPending
+            }
+            onClick={sendSol}
+          >
+            Pay
+          </Button>
 
-      {isOwner ? (
-        <p className="text-sm text-gray-300">
-          Note: You own this product. You cannot buy your own product.
-        </p>
-      ) : null}
+          {!session.data?.user ? (
+            <p className="text-sm text-gray-300">
+              Note: You must login with a wallet to buy this product.
+            </p>
+          ) : null}
 
-      <p className="text-sm text-gray-500">
-        Disclaimer: This is a DeFi payment that cannot be reversed. Funds go
-        directly to the merchant.
-      </p>
+          {isOwner ? (
+            <p className="text-sm text-gray-300">
+              Note: You own this product. You cannot buy your own product.
+            </p>
+          ) : null}
+
+          <p className="text-sm text-gray-500">
+            Disclaimer: This is a DeFi payment that cannot be reversed. Funds go
+            directly to the merchant.
+          </p>
+        </>
+      )}
     </>
   );
 }
