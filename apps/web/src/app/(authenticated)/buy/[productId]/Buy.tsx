@@ -58,7 +58,7 @@ function Buy({ product }: { product: SelectProduct }) {
         id: sig,
         from: publicKey.toBase58(),
         to: product.userId,
-        amount: price,
+        amount: price * 0.98,
         productId: product.id,
       });
 

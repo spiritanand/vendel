@@ -30,7 +30,7 @@ export const config = {
           const signinMessage = new SigninMessage(
             JSON.parse(credentials?.message || "{}") as SigninMessage,
           );
-          const nextAuthUrl = new URL(process.env.VERCEL_URL ?? "");
+          const nextAuthUrl = new URL(process.env.NEXTAUTH_URL ?? "");
 
           if (signinMessage.domain !== nextAuthUrl.host) return null;
 
