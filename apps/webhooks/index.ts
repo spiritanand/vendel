@@ -31,6 +31,26 @@ app.post("/webhook", (req, res) => {
   }
 });
 
+app.post("/paymentPostCheck", async (req, res) => {
+  // Assuming the body-parser middleware is already set up to parse JSON payloads:
+  const { productId, amount, fromPubkey } = req.body;
+
+  console.log("Received payment info:", {
+    productId,
+    amount,
+    fromPubkey,
+  });
+
+  // Process the received data
+  // For example, validate the data, perform some business logic, or store it in your database
+
+  // After processing the payment info, send a response back to the caller
+  res.json({
+    status: "success",
+    message: "Payment information processed successfully.",
+  });
+});
+
 // Start Express server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
