@@ -34,13 +34,23 @@ function Buy({ product }: { product: SelectProduct }) {
 
       const toPubkey = new web3.PublicKey(product.userId);
 
-      const sendSolInstruction = web3.SystemProgram.transfer({
+      const sendSolToSellerInstruction = web3.SystemProgram.transfer({
         fromPubkey: publicKey,
         toPubkey,
-        lamports: LAMPORTS_PER_SOL * product.price,
+        lamports: LAMPORTS_PER_SOL * product.price * 0.98,
       });
 
-      transaction.add(sendSolInstruction);
+      const vendelPubkey = new web3.PublicKey(
+        "F5zgQ1wKFwM9axWgsGo7e2P19qotHFw6XkCbQ86Paexv",
+      );
+      const sendSolCommissionInstruction = web3.SystemProgram.transfer({
+        fromPubkey: publicKey,
+        toPubkey: vendelPubkey,
+        lamports: LAMPORTS_PER_SOL * product.price * 0.02,
+      });
+
+      transaction.add(sendSolToSellerInstruction);
+      transaction.add(sendSolCommissionInstruction);
 
       const sig = await sendTransaction(transaction, connection);
 

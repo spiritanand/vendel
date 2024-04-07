@@ -2,17 +2,25 @@
 
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import type { SignInOptions } from "next-auth/react";
 import { getCsrfToken, signIn } from "next-auth/react";
 import bs58 from "bs58";
 import { Button } from "@repo/ui/ui/button";
+import { useSearchParams } from "next/navigation";
 import { SigninMessage } from "@/libWeb/utils/SigninMessage";
-import { ROUTES } from "@/libWeb/constants";
 
-function SignIn({ callbackUrl = ROUTES.PRODUCTS }: { callbackUrl?: string }) {
+function SignIn({
+  callbackUrl,
+  className,
+}: {
+  callbackUrl?: string;
+  className?: string;
+}) {
   const wallet = useWallet();
   const walletModal = useWalletModal();
 
-  const callback = callbackUrl === "#" ? window.location.href : callbackUrl;
+  const searchParams = useSearchParams();
+  const callbackUrlInHref = searchParams.get("callbackUrl");
 
   const handleSignIn = async () => {
     try {
@@ -33,11 +41,15 @@ function SignIn({ callbackUrl = ROUTES.PRODUCTS }: { callbackUrl?: string }) {
       const signature = await wallet.signMessage(data);
       const serializedSignature = bs58.encode(signature);
 
-      await signIn("credentials", {
+      const options: SignInOptions = {
         message: JSON.stringify(message),
         signature: serializedSignature,
-        callbackUrl: callback,
-      });
+      };
+
+      if (callbackUrl) options.callbackUrl = callbackUrl;
+      if (callbackUrlInHref) options.callbackUrl = callbackUrlInHref;
+
+      await signIn("credentials", options);
     } catch (error) {
       console.error("Failed to sign in", error);
     }
@@ -45,6 +57,7 @@ function SignIn({ callbackUrl = ROUTES.PRODUCTS }: { callbackUrl?: string }) {
 
   return (
     <Button
+      className={className}
       onClick={() => {
         void handleSignIn();
       }}

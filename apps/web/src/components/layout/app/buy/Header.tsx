@@ -10,7 +10,7 @@ async function Header() {
     <header className="flex items-center justify-between px-10">
       <Image alt="Vendel" height={80} src="/fullLogo.png" width={80} />
 
-      <nav>{session ? <AvatarMenu /> : <SignIn callbackUrl="#" />}</nav>
+      <nav>{session ? <AvatarMenu /> : <SignIn />}</nav>
     </header>
   );
 }

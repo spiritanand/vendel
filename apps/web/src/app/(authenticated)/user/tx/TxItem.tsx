@@ -12,7 +12,7 @@ import Solana from "@/components/logos/Solana";
 
 function TxItem({ tx, isIn = true }: { tx: SelectTx; isIn?: boolean }) {
   return (
-    <Card className="flex items-center gap-4">
+    <Card className="mt-6 flex items-center gap-4">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-2xl">
           {tx.amount} <Solana />

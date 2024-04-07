@@ -86,6 +86,9 @@ export const config = {
     logo: "/favicon.ico",
     brandColor: "#16a34a",
   },
+  pages: {
+    signIn: "/auth/signIn",
+  },
 } satisfies NextAuthOptions;
 
 // Use it in server contexts
