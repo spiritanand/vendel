@@ -6,9 +6,10 @@ import { getInTx } from "@/libWeb/dbQueries";
 async function Stats() {
   const inTxs = await getInTx();
 
-  const totalSales = inTxs.reduce((acc, tx) => {
-    return acc + tx.amount;
-  }, 0);
+  const totalSales =
+    inTxs.reduce((acc, tx) => {
+      return acc + tx.amount;
+    }, 0) * 0.98;
 
   return (
     <div className="mt-4 flex flex-col items-center justify-between gap-10 rounded-md bg-gradient-to-tl from-neutral-200 via-teal-300 to-sky-200 p-8 text-black sm:mx-6 sm:my-8 sm:flex-row">
@@ -23,7 +24,7 @@ async function Stats() {
           <div className="text-lg font-semibold">{inTxs.length}</div>
         </div>
       </div>
-      <div className="text-center">
+      <div>
         <div className="text-sm text-gray-500">Total Sales</div>
         <div className="flex gap-3 text-lg font-semibold">
           <Solana />

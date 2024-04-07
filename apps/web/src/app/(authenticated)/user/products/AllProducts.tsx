@@ -21,9 +21,10 @@ function AllProducts({
       {products.data.map((product) => {
         // TODO: Potential optimization for large arrays
         const productTxs = allInTxs.filter((tx) => tx.productId === product.id);
-        const sales = productTxs.reduce((acc, tx) => {
-          return acc + tx.amount;
-        }, 0);
+        const sales =
+          productTxs.reduce((acc, tx) => {
+            return acc + tx.amount;
+          }, 0) * 0.98;
         const volume = productTxs.length;
 
         return (
