@@ -4,7 +4,8 @@
 		"**/.env.*local"
 	],
 	"globalEnv": [
-		"VERCEL_URL"
+		"VERCEL_URL",
+		"DB_URL"
 	],
 	"pipeline": {
 		"build": {
