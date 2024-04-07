@@ -19,7 +19,7 @@ import { Checkbox } from "@repo/ui/ui/checkbox.tsx";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "@repo/ui/ui/toaster";
-import { advancedFormSchema } from "@/libWeb/zodSchemas.ts";
+import { advancedFormSchema } from "@repo/db/zodSchemas.ts";
 import { trpc } from "@/app/(authenticated)/_trpc/client.ts";
 import { useCreateProductStore } from "@/store/createProduct.ts";
 import { ROUTES } from "@/libWeb/constants.ts";

@@ -1,8 +1,11 @@
 import { db } from "@repo/db";
 import { products } from "@repo/db/schema.ts";
 import { and, eq } from "drizzle-orm";
+import {
+  doByIdSchema,
+  formSchema,
+} from "@repo/db/zodSchemas.ts";
 import { authedProcedure, router } from "@/server/trpc";
-import { doByIdSchema, formSchema } from "@/libWeb/zodSchemas.ts";
 import { getAllProducts } from "@/libWeb/dbQueries.ts";
 
 const productRouter = router({

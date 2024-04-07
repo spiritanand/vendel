@@ -6,8 +6,9 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 import { createId } from "@paralleldrive/cuid2";
-import { QuantityType, SplitType } from "@/libWeb/zodSchemas";
+import { QuantityType, SplitType } from "./zodSchemas";
 import { relations } from "drizzle-orm";
+import { z } from "zod";
 
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),
@@ -56,6 +57,7 @@ export const transactions = pgTable("transactions", {
 });
 export type SelectTx = typeof transactions.$inferSelect;
 export type InsertTx = typeof transactions.$inferInsert;
+export const zodInsertTx = z.custom<InsertTx>();
 
 // Relations
 

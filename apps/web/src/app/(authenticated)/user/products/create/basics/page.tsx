@@ -16,8 +16,8 @@ import type { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowBigRight, Asterisk } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { basicFormSchema } from "@repo/db/zodSchemas.ts";
 import Solana from "@/components/logos/Solana.tsx";
-import { basicFormSchema } from "@/libWeb/zodSchemas.ts";
 import { useCreateProductStore } from "@/store/createProduct.ts";
 
 export default function CreateProductForm() {

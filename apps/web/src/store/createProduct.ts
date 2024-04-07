@@ -3,7 +3,7 @@ import type { z } from "zod";
 import type {
   advancedFormSchema,
   basicFormSchema,
-} from "@/libWeb/zodSchemas.ts";
+} from "@repo/db/zodSchemas.ts";
 import { createSelectors } from "@/store/createSelectors.ts";
 
 interface FormSteps {
