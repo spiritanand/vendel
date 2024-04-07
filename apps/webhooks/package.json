@@ -3,9 +3,8 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"start": "node dist/index.js",
-		"dev": "nodemon index.ts",
-		"build": "pnpm exec tsc",
+		"start": "concurrently \"pnpm esrun index.ts\" \"pnpm esrun process.ts\"",
+		"dev": "concurrently \"pnpm esrun --watch index.ts\" \"pnpm esrun --watch process.ts\"",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
@@ -13,13 +12,19 @@
 	"license": "ISC",
 	"dependencies": {
 		"@repo/db": "workspace:*",
+		"@types/body-parser": "^1.19.5",
+		"amqplib": "^0.10.3",
+		"body-parser": "^1.20.2",
 		"dotenv": "^16.4.5",
 		"drizzle-orm": "^0.30.7",
 		"express": "^4.19.2",
 		"pg": "^8.11.5"
 	},
 	"devDependencies": {
+		"@repo/eslint-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
+		"@digitak/esrun": "^3.2.26",
+		"@types/amqplib": "^0.10.5",
 		"@types/express": "^4.17.21",
 		"@types/node": "^20.11.24",
 		"concurrently": "^8.2.2",

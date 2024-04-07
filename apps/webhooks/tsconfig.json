@@ -1,11 +1,8 @@
 {
 	"extends": "@repo/typescript-config/base.json",
-	"include": [
-		"**/*.ts"
-	],
 	"compilerOptions": {
-		"target": "ES6",
-		"module": "CommonJS",
+		"target": "ESNext",
+		"module": "ESNext",
 		"moduleResolution": "node",
 		"outDir": "./dist",
 		"baseUrl": ".",
@@ -15,7 +12,7 @@
 		"esModuleInterop": true,
 		"sourceMap": true
 	},
-	"exclude": [
-		"node_modules"
+	"include": [
+		"."
 	]
 }

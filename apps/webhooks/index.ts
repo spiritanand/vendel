@@ -1,14 +1,37 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
+import express from "express";
+import bodyParser from "body-parser";
+import { connect } from "amqplib";
 
-dotenv.config();
+// Initialize Express
+const app = express();
+const PORT = 8001;
 
-const app: Express = express();
-const port = process.env.PORT || 8080;
+app.use(bodyParser.json());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+// RabbitMQ setup
+const amqpUrl = "amqp://localhost"; // Your AMQP server URL
+
+// Connect to RabbitMQ
+const connection = await connect(amqpUrl);
+const channel = await connection.createChannel();
+await channel.assertQueue("paymentEvents", { durable: false });
+
+// Webhook endpoint
+app.post("/webhook", (req, res) => {
+  // Here you would verify the request signature
+  const event = req.body;
+  console.log({ event });
+
+  // Assuming verification passed, we enqueue the event
+  if (channel) {
+    channel.sendToQueue("paymentEvents", Buffer.from(JSON.stringify(event)));
+    res.send("Event queued");
+  } else {
+    res.status(500).send("Queue not initialized");
+  }
 });
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
+
+// Start Express server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
