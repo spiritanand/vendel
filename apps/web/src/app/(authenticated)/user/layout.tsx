@@ -1,4 +1,4 @@
-import Header from "@/components/layout/app/User/Header.tsx";
+import Header from "@/components/layout/app/user/Header.tsx";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
