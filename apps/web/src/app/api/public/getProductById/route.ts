@@ -1,6 +1,6 @@
-import { db } from "@repo/db";
-import { products } from "@repo/db/schema";
 import { eq } from "drizzle-orm";
+import { db } from "@repo/db";
+import { products } from "@repo/db/schema.ts";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

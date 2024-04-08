@@ -1,5 +1,5 @@
 import { db } from "@repo/db";
-import { transactions } from "@repo/db/schema";
+import { transactions } from "@repo/db/schema.ts";
 
 export async function POST(req: Request) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Test

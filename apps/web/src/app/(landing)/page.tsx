@@ -1,13 +1,13 @@
-import VendelCheckout from "@spiritanandio/vendel-react/VendelCheckout.tsx";
-import Header from "@/components/layout/Landing/header.tsx";
+"use client";
+
+import VendelCheckout from "@spiritanandio/vendel-react/lib";
 
 function Page() {
   return (
     <>
-      <Header />
       <div>DESC</div>
 
-      <VendelCheckout productId="gie0244w1kxwjtq3wog6qsfc" />
+      <VendelCheckout productId="x9hxfl2yft2ttoxsdhj6mbiz" />
     </>
   );
 }
