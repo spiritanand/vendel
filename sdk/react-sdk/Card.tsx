@@ -12,6 +12,7 @@ function Card({ productId }: { productId: string }) {
 
   const balance = useGetBalance();
 
+  const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState<
     | {
         id: string;
@@ -53,13 +54,20 @@ function Card({ productId }: { productId: string }) {
 
       const sig = await sendTransaction(transaction, connection);
 
-      // await addTx.mutateAsync({
-      //   id: sig,
-      //   from: publicKey.toBase58(),
-      //   to: product.userId,
-      //   amount: price * 0.98,
-      //   productId: product.id,
-      // });
+      await fetch("http://localhost:3000/api/addTx", {
+        method: "POST", // Specify the method
+        headers: {
+          // Headers are important! They tell the server what type of data you're sending.
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: sig,
+          from: publicKey.toBase58(),
+          to: product.userId,
+          amount: product.price * 0.98,
+          productId: product.id,
+        }),
+      });
 
       setTxSig(sig);
       setIsSuccess(true);
@@ -80,13 +88,16 @@ function Card({ productId }: { productId: string }) {
       })
       .catch((error) => {
         console.error("Fetching error: ", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
   return (
     <div className="card">
-      {!publicKey ? (
-        <WalletMultiButton />
+      {isLoading ? (
+        <span className="loader" />
       ) : (
         <>
           <div className="user">
@@ -102,36 +113,46 @@ function Card({ productId }: { productId: string }) {
               </span>
             </p>
 
-            <p className="connected-wallet">
-              Connected:{" "}
-              <a
-                className="pubkey"
-                href={`https://explorer.solana.com/address/${publicKey}?cluster=devnet`}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {publicKey.toString().slice(0, 5)}...
-                {publicKey.toString().slice(-5)}
-              </a>
-            </p>
+            {publicKey ? (
+              <p className="connected-wallet">
+                Connected:{" "}
+                <a
+                  className="pubkey"
+                  href={`https://explorer.solana.com/address/${publicKey}?cluster=devnet`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {publicKey.toString().slice(0, 5)}...
+                  {publicKey.toString().slice(-5)}
+                </a>
+              </p>
+            ) : null}
           </div>
 
           <Product product={product} />
 
-          {isSuccess ? (
-            <>
-              <p style={{ color: "#22c55e" }}>Transaction sent successfully!</p>
-              <a
-                href={`https://explorer.solana.com/tx/${txSig}?cluster=devnet`}
-                rel="noopener noreferrer"
-                target="_blank"
-                className="pubkey"
-              >
-                View transaction
-              </a>
-            </>
+          {!publicKey ? (
+            <WalletMultiButton />
           ) : (
-            <button onClick={sendSol}>Pay</button>
+            <>
+              {isSuccess ? (
+                <>
+                  <p style={{ color: "#22c55e" }}>
+                    Transaction sent successfully!
+                  </p>
+                  <a
+                    href={`https://explorer.solana.com/tx/${txSig}?cluster=devnet`}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className="pubkey"
+                  >
+                    View transaction
+                  </a>
+                </>
+              ) : (
+                <button onClick={sendSol}>Pay</button>
+              )}
+            </>
           )}
         </>
       )}

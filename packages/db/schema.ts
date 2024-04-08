@@ -66,7 +66,7 @@ export const zodInsertTx = z.custom<InsertTx>();
 //   responses: many(responses),
 // }));
 export const txRelations = relations(transactions, ({ one }) => ({
-  form: one(products, {
+  product: one(products, {
     fields: [transactions.productId],
     references: [products.id],
   }),
