@@ -18,7 +18,7 @@ async function Page() {
           Integrate web3 checkout
         </h1>
         <h2 className="text-primary mt-1 text-center text-3xl font-bold uppercase">
-          in your apps
+          in your app
         </h2>
         <h3 className="text-primary mt-5 flex items-center justify-center gap-3 text-center text-xl">
           Powered by{" "}
