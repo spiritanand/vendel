@@ -26,8 +26,8 @@ function Buy({ product }: { product: SelectProduct }) {
   const balance = useGetBalance();
   const isSufficient = balance >= price;
 
-  const [isSuccess, setIsSuccess] = useState(true);
-  const [txSig, setTxSig] = useState("HOLA");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [txSig, setTxSig] = useState("");
 
   const sendSol = async () => {
     if (!publicKey) return;

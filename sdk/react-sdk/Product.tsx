@@ -12,10 +12,12 @@ function Product({
     | undefined;
 }) {
   return (
-    <div>
+    <div className="product">
       <h2>{product?.name}</h2>
-      <p>{product?.description}</p>
-      <p>Price: {product?.price}</p>
+      <p className="product-desc">{product?.description}</p>
+      <p className="product-price">
+        Total: <span className="product-price-value">{product?.price} SOL</span>
+      </p>
     </div>
   );
 }

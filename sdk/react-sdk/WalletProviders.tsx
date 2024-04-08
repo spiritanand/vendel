@@ -7,7 +7,6 @@ import {
 import * as web3 from "@solana/web3.js";
 import { useMemo } from "react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
-import "@solana/wallet-adapter-react-ui/styles.css";
 
 function WalletProviders({ children }: { children: React.ReactNode }) {
   const endpoint = web3.clusterApiUrl("devnet");
