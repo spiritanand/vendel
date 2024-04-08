@@ -15,7 +15,7 @@ async function Page() {
 
       <main className="container flex min-h-screen flex-col items-center justify-center">
         <h1 className="text-primary text-center text-5xl font-black uppercase sm:text-6xl md:text-9xl">
-          Integrate web3 checkout
+          Integrate web3 checkouts
         </h1>
         <h2 className="text-primary mt-1 text-center text-3xl font-bold uppercase">
           in your app
@@ -32,7 +32,10 @@ async function Page() {
             </Button>
           </Link>
         ) : (
-          <SignIn className="mt-16 p-10 text-5xl font-black" />
+          <SignIn
+            callbackUrl={ROUTES.PRODUCTS}
+            className="mt-16 p-10 text-5xl font-black"
+          />
         )}
       </main>
     </>

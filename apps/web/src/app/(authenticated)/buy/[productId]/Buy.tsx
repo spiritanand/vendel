@@ -85,7 +85,7 @@ function Buy({ product }: { product: SelectProduct }) {
 
           <a
             className="ml-2 flex w-fit items-center gap-2 rounded-md bg-gray-700 p-2 text-xs text-blue-500"
-            href={`https://explorer.solana.com/address/${txSig}?cluster=devnet`}
+            href={`https://explorer.solana.com/tx/${txSig}?cluster=devnet`}
             rel="noopener noreferrer"
             target="_blank"
           >
