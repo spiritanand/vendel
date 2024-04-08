@@ -1,6 +1,6 @@
 "use client";
 
-import VendelCheckout from "@spiritanandio/vendel-react/lib";
+import VendelCheckout from "@spiritanandio/vendel-react";
 
 function Page() {
   return (
