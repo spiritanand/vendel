@@ -3,8 +3,13 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import * as web3 from "@solana/web3.js";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { Buffer } from "buffer/";
 import useGetBalance from "./useGetBalance";
 import Product from "./Product.tsx";
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- no def in browser required for web3 txs
+// @ts-expect-error
+window.Buffer = Buffer;
 
 function Card({ productId }: { productId: string }) {
   const { publicKey, sendTransaction } = useWallet();
@@ -55,25 +60,26 @@ function Card({ productId }: { productId: string }) {
 
       const sig = await sendTransaction(transaction, connection);
 
-      await fetch("https://vendel.xyz/api/public/addTx", {
-        method: "POST", // Specify the method
-        headers: {
-          // Headers are important! They tell the server what type of data you're sending.
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: sig,
-          from: publicKey.toBase58(),
-          to: product.userId,
-          amount: product.price * 0.98,
-          productId: product.id,
-        }),
-      });
+      // TODO: Not working. Gives CORS error
+      // await fetch("https://vendel.xyz/api/public/addTx", {
+      //   method: "POST", // Specify the method
+      //   headers: {
+      //     // Headers are important! They tell the server what type of data you're sending.
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     id: sig,
+      //     from: publicKey.toBase58(),
+      //     to: product.userId,
+      //     amount: product.price * 0.98,
+      //     productId: product.id,
+      //   }),
+      // });
 
       setTxSig(sig);
       setIsSuccess(true);
     } catch (e) {
-      console.log({ e });
+      console.error({ e });
     }
   };
 

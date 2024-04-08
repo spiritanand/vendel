@@ -1,7 +1,7 @@
 {
 	"name": "@spiritanandio/vendel-react",
 	"private": false,
-	"version": "0.0.2",
+	"version": "0.0.4",
 	"main": "dist/vendel-react.js",
 	"types": "dist/index.d.ts",
 	"type": "module",
@@ -24,12 +24,11 @@
 		"@solana/wallet-adapter-react": "^0.15.35",
 		"@solana/wallet-adapter-react-ui": "^0.9.35",
 		"@solana/wallet-adapter-wallets": "^0.19.32",
-		"@solana/web3.js": "^1.91.3"
+		"@solana/web3.js": "^1.91.3",
+		"buffer": "^6.0.3"
 	},
 	"devDependencies": {
 		"@repo/eslint-config": "workspace:*",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
 		"@types/react": "^18.2.66",
 		"@types/react-dom": "^18.2.22",
 		"@typescript-eslint/eslint-plugin": "^7.2.0",
@@ -38,6 +37,8 @@
 		"eslint": "^8.57.0",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.4.6",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
 		"typescript": "^5.2.2",
 		"vite": "^5.2.0",
 		"vite-plugin-dts": "^3.8.1",
