@@ -1,3 +1,4 @@
+import VendelCheckout from "@spiritanandio/vendel-react/VendelCheckout.tsx";
 import Header from "@/components/layout/Landing/header.tsx";
 
 function Page() {
@@ -5,6 +6,8 @@ function Page() {
     <>
       <Header />
       <div>DESC</div>
+
+      <VendelCheckout productId="gie0244w1kxwjtq3wog6qsfc" />
     </>
   );
 }
